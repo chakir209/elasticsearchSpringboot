@@ -19,6 +19,9 @@ public class DocumentService {
     @Autowired
     private DocumentRepository documentRepository;
 
+
+
+
     public String extractTextFromDocument(MultipartFile file) throws IOException {
         try (InputStream inputStream = file.getInputStream()) {
             BodyContentHandler handler = new BodyContentHandler();
@@ -34,14 +37,10 @@ public class DocumentService {
         }
     }
 
-    public void indexDocument(MultipartFile file, String title) throws IOException {
-        String content = extractTextFromDocument(file);
-
-        if (content != null) {
-            DocumentFile document = new DocumentFile();
-            document.setTitle(title);
-            document.setContent(content);
-
+    public void indexDocument(DocumentFile document) throws IOException {
+        //  String content = extractTextFromDocument(file);
+        if (document != null) {
+            // document.setContent(content);
             documentRepository.save(document);
         }
     }
