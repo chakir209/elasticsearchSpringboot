@@ -3,33 +3,28 @@ package com.example.demo.model;
 import com.example.demo.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-@Document(indexName = "documents")
 @Data
-public class DocumentFile {
-    @Id
-    private String id;
+public class MultiCriteriaSearchRequest {
     private String title;
-    private String content;
     private String referenceGed;
+
     private String reference;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @Field(type = FieldType.Date)
-    private LocalDate uploadDate ;
+
+    private LocalDate uploadDate;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @Field(type = FieldType.Date)
-    private LocalDate dateLastUpdate ;
+    private LocalDate dateLastUpdate;
+    private Boolean folder;
+    private Double size;
 
-    private Boolean folder = false;
-   private Double size ;
-
-    private String description;
 }
+
+
+
+
