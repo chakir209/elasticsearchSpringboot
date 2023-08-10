@@ -14,8 +14,8 @@ public class DocumentFile {
     private String title;
     private String content;
     private String referenceGed;
-
-
+    private LocalDateTime uploadDate ;
+    private LocalDateTime dateLastUpdate ;
 
     private Boolean folder = false;
     //private BigDecimal size = BigDecimal.ZERO;
