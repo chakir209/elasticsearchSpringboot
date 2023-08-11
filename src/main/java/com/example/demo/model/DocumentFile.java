@@ -29,7 +29,9 @@ public class DocumentFile {
     private LocalDate dateLastUpdate ;
 
     private Boolean folder = false;
-   private Double size ;
+    private Double size ;
+    private String author;
+    private String format;
 
     private String description;
 }

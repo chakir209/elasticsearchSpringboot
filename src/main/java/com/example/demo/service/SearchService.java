@@ -40,6 +40,7 @@ public class SearchService extends  AbstractService {
         addMatchQuery(boolQuery, "folder", searchRequest.getFolder());
         addMatchQuery(boolQuery, "size", searchRequest.getSize());
         addMatchQuery(boolQuery, "content", searchRequest.getContent());
+        addMatchQuery(boolQuery, "format", searchRequest.getFormat());
         addMatchQuery(boolQuery, "description", searchRequest.getDescription());
         addMatchQuery(boolQuery, "author", searchRequest.getAuthor());
 

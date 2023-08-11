@@ -26,6 +26,8 @@ public class MultiCriteriaSearchRequest {
     private Boolean folder;
     private Double size;
 
+    private String format;
+
 }
 
 
