@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 public class MultiCriteriaSearchRequest {
     private String title;
     private String referenceGed;
+    private String content;
+    private String description;
 
     private String reference;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)

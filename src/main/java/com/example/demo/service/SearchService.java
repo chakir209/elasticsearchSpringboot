@@ -12,7 +12,7 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SearchService {
+public class SearchService  {
 
      private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
@@ -33,7 +33,7 @@ public class SearchService {
         if (searchRequest.getReference() != null) {
             boolQuery.must(QueryBuilders.matchQuery("reference", searchRequest.getReference()));
         }
-        /*
+
         if (searchRequest.getUploadDate() != null) {
             boolQuery.must(QueryBuilders.matchQuery("uploadDate", searchRequest.getUploadDate()));
         }
@@ -41,12 +41,18 @@ public class SearchService {
             boolQuery.must(QueryBuilders.matchQuery("dateLastUpdate", searchRequest.getDateLastUpdate()));
         }
 
-         */
+
         if (searchRequest.getFolder() != null) {
             boolQuery.must(QueryBuilders.matchQuery("folder", searchRequest.getFolder()));
         }
         if (searchRequest.getSize() != null) {
             boolQuery.must(QueryBuilders.matchQuery("size", searchRequest.getSize()));
+        }
+        if (searchRequest.getContent() != null) {
+            boolQuery.must(QueryBuilders.matchQuery("content", searchRequest.getContent()));
+        }
+        if (searchRequest.getDescription() != null) {
+            boolQuery.must(QueryBuilders.matchQuery("description", searchRequest.getDescription()));
         }
         // ... add more criteria ...
 
