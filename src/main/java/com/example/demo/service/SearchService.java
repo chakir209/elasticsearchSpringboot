@@ -11,8 +11,11 @@ import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQueryBuil
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Service
-public class SearchService  {
+public class SearchService extends  AbstractService {
 
      private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
@@ -21,42 +24,25 @@ public class SearchService  {
         this.elasticsearchRestTemplate = new ElasticsearchRestTemplate(elasticsearchClient);
     }
 
+
+
+
+// ... Ajoutez des surcharges pour d'autres types de champs si nécessaire ...
+
     public SearchHits<DocumentFile> searchDocuments(MultiCriteriaSearchRequest searchRequest) {
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
-        if (searchRequest.getTitle() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("title", searchRequest.getTitle()));
-        }
-        if (searchRequest.getReferenceGed() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("referenceGed", searchRequest.getReferenceGed()));
-        }
-        if (searchRequest.getReference() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("reference", searchRequest.getReference()));
-        }
+        addMatchQuery(boolQuery, "title", searchRequest.getTitle());
+        addMatchQuery(boolQuery, "referenceGed", searchRequest.getReferenceGed());
+        addMatchQuery(boolQuery, "reference", searchRequest.getReference());
+        addMatchQuery(boolQuery, "uploadDate", searchRequest.getUploadDate());
+        addMatchQuery(boolQuery, "dateLastUpdate", searchRequest.getDateLastUpdate());
+        addMatchQuery(boolQuery, "folder", searchRequest.getFolder());
+        addMatchQuery(boolQuery, "size", searchRequest.getSize());
+        addMatchQuery(boolQuery, "content", searchRequest.getContent());
+        addMatchQuery(boolQuery, "description", searchRequest.getDescription());
+        addMatchQuery(boolQuery, "author", searchRequest.getAuthor());
 
-        if (searchRequest.getUploadDate() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("uploadDate", searchRequest.getUploadDate()));
-        }
-        if (searchRequest.getDateLastUpdate() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("dateLastUpdate", searchRequest.getDateLastUpdate()));
-        }
-
-
-        if (searchRequest.getFolder() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("folder", searchRequest.getFolder()));
-        }
-        if (searchRequest.getSize() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("size", searchRequest.getSize()));
-        }
-        if (searchRequest.getContent() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("content", searchRequest.getContent()));
-        }
-        if (searchRequest.getDescription() != null) {
-            boolQuery.must(QueryBuilders.matchQuery("description", searchRequest.getDescription()));
-        }
-        // ... add more criteria ...
-
-        // Perform the search using the boolQuery
         return elasticsearchRestTemplate.search(new NativeSearchQueryBuilder()
                 .withQuery(boolQuery)
                 .build(), DocumentFile.class);

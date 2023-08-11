@@ -14,6 +14,7 @@ public class MultiCriteriaSearchRequest {
     private String title;
     private String referenceGed;
     private String content;
+    private String author;
     private String description;
 
     private String reference;
