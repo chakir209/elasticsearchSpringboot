@@ -24,6 +24,8 @@ public class MultiCriteriaSearchRequest {
     private LocalDate dateLastUpdate;
     private Boolean folder;
     private Double size;
+    private String author;
+    private String format;
 
 }
 

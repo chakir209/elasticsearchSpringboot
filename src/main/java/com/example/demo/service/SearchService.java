@@ -40,8 +40,9 @@ public class SearchService  {
         if (searchRequest.getDateLastUpdate() != null) {
             boolQuery.must(QueryBuilders.matchQuery("dateLastUpdate", searchRequest.getDateLastUpdate()));
         }
-
-
+        if (searchRequest.getDateLastUpdate() != null) {
+            boolQuery.must(QueryBuilders.matchQuery("dateLastUpdate", searchRequest.getDateLastUpdate()));
+        }
         if (searchRequest.getFolder() != null) {
             boolQuery.must(QueryBuilders.matchQuery("folder", searchRequest.getFolder()));
         }
@@ -54,6 +55,13 @@ public class SearchService  {
         if (searchRequest.getDescription() != null) {
             boolQuery.must(QueryBuilders.matchQuery("description", searchRequest.getDescription()));
         }
+        if (searchRequest.getAuthor() != null) {
+            boolQuery.must(QueryBuilders.matchQuery("author", searchRequest.getAuthor()));
+        }
+        if (searchRequest.getFormat() != null) {
+            boolQuery.must(QueryBuilders.matchQuery("format", searchRequest.getFormat()));
+        }
+
         // ... add more criteria ...
 
         // Perform the search using the boolQuery
